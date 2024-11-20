@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketplace - Accueil</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='accueil.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <h1>Marketplace & enchères</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
+          <li><a href="{{ url_for('login') }}">Connexion</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Articles en vente</h2>
+
+      <!-- Liste des items -->
+      <div class="items-container">
+        <!-- Item 1 -->
+        <div class="item-card">
+          <img
+            src="{{ url_for('static', filename='images/divan.jpg') }}"
+            alt="Item 1"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3>Divan</h3>
+            <p class="item-description">
+              Je vends mon divan. Pas négociable. Petite tache sur un des
+              coussin. Premier arrivé premier servi.
+            </p>
+            <p class="item-price">200$</p>
+            <button class="buy-button">Acheter</button>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="item-card">
+          <img
+            src="{{ url_for('static', filename='images/guitarehero.jpg') }}"
+            alt="Item 2"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3>Guitare pour guitar hero</h3>
+            <p class="item-description">Fonctionne très bien</p>
+            <p class="item-price">45$</p>
+            <button class="buy-button">Acheter</button>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="item-card">
+          <img
+            src="https://via.placeholder.com/300"
+            alt="Item 3"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3>Chaise en bois</h3>
+            <p class="item-description">
+              Chaise confortable en bois massif avec coussin.
+            </p>
+            <p class="item-price">59,99€</p>
+            <button class="buy-button">Acheter</button>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="item-card">
+          <img
+            src="https://via.placeholder.com/300"
+            alt="Item 4"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3>Table basse</h3>
+            <p class="item-description">
+              Table basse en verre avec pieds en métal.
+            </p>
+            <p class="item-price">99,99€</p>
+            <button class="buy-button">Acheter</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Mon Marketplace. Tous droits réservés.</p>
+    </footer>
+  </body>
+</html>

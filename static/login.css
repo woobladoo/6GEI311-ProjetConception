@@ -1,0 +1,113 @@
+/* General body styles */
+body {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(
+    to bottom,
+    #e0e0e0,
+    #b0b0b0
+  ); /* Subtle grey gradient */
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically if needed */
+  height: 100vh;
+  color: #333; /* Neutral text color */
+  text-align: center; /* Center text inside containers */
+}
+
+/* Form container */
+form {
+  background: #fff; /* White form background */
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Softer shadow for a clean look */
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Heading styles */
+h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 20px;
+  color: #444; /* Dark grey for the heading */
+  font-size: 2rem;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #aaa; /* Light grey border */
+  border-radius: 5px;
+  background: #f9f9f9; /* Soft grey background */
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #777; /* Slightly darker grey on focus */
+  outline: none;
+  box-shadow: 0 0 5px rgba(120, 120, 120, 0.5); /* Subtle grey glow */
+}
+
+/* Submit button */
+button {
+  padding: 10px 20px;
+  background-color: #555; /* Dark grey button */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #333; /* Slightly darker grey on hover */
+}
+
+/* Flash messages */
+.message {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.message.danger {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.message.success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  form {
+    padding: 15px 20px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}
+
+/* Center the form on the page */
+form {
+  margin: 20px auto; /* Centers the form horizontally */
+}
