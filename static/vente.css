@@ -1,0 +1,138 @@
+#sellForm {
+  display: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  flex-direction: column;
+  height: 100vh;
+  display: flex;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+header .logo h1 {
+  font-size: 2.5rem;
+}
+
+header nav ul {
+  list-style-type: none;
+}
+
+header nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+main {
+  flex-grow: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* Conteneur des articles */
+.items-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  padding: 20px;
+}
+
+/* Carte d'article */
+.item-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-card .item-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.item-card .item-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.item-card .item-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.item-card .item-info .item-description {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #555;
+  text-align: left;
+}
+
+.item-card .item-info .item-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2d9cdb;
+}
+
+.item-card .item-info .buy-button {
+  padding: 10px 20px;
+  background-color: #2d9cdb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.item-card .item-info .buy-button:hover {
+  background-color: #1a6fa4;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  font-size: 1rem;
+  margin-top: auto;
+}

@@ -33,5 +33,9 @@ def login():
 def accueil():
     return render_template("accueil.html")
 
+@app.route("/vente")
+def vente():
+    return render_template("vente.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
