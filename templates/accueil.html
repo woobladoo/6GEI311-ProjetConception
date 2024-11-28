@@ -24,8 +24,14 @@
       <nav>
         <ul>
           <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
-          <li><a href="{{ url_for('login') }}">Connexion</a></li>
           <li><a href="{{ url_for('vente') }}">Mettre en vente</a></li>
+          <form
+            action="{{ url_for('logout') }}"
+            method="post"
+            style="display: inline"
+          >
+            <button type="submit" class="btn btn-danger">Se déconnecter</button>
+          </form>
         </ul>
       </nav>
     </header>
@@ -101,6 +107,36 @@
             <button class="buy-button">Acheter</button>
           </div>
         </div>
+
+        <!-- Item 5 -->
+        <div class="item-card">
+          <img
+            src="https://via.placeholder.com/300"
+            alt="Item 5"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3>T-shirt</h3>
+            <p class="item-description">T-shirt de band.</p>
+            <p class="item-price">10$</p>
+            <button class="buy-button">Acheter</button>
+          </div>
+        </div>
+        <!-- Item 5 -->
+        <div class="item-card">
+          <img
+            src="https://via.placeholder.com/300"
+            alt="Item 5"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3>T-shirt</h3>
+            <p class="item-description">
+              T-shirt de band.
+            </p>
+            <p class="item-price">10$</p>
+            <button class="buy-button">Acheter</button>
+          </div>
       </div>
     </main>
 

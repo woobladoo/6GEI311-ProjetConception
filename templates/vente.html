@@ -25,8 +25,14 @@
       <nav>
         <ul>
           <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
-          <li><a href="{{ url_for('login') }}">Connexion</a></li>
           <li><a href="{{ url_for('vente') }}">Mettre en vente</a></li>
+          <form
+            action="{{ url_for('logout') }}"
+            method="post"
+            style="display: inline"
+          >
+            <button type="submit" class="btn btn-danger">Se déconnecter</button>
+          </form>
         </ul>
       </nav>
     </header>
