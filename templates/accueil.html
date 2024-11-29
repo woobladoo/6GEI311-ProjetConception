@@ -25,14 +25,18 @@
         <ul>
           <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
           <li><a href="{{ url_for('vente') }}">Mettre en vente</a></li>
-          <form
+          <li><a href="{{ url_for('vitrine') }}">Ma vitrine</a></li>
+          
+        </ul>
+
+        <form
             action="{{ url_for('logout') }}"
             method="post"
             style="display: inline"
+            class="logout-form"
           >
             <button type="submit" class="btn btn-danger">Se déconnecter</button>
           </form>
-        </ul>
       </nav>
     </header>
 

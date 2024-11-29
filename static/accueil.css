@@ -24,13 +24,23 @@ header .logo h1 {
   font-size: 2.5rem;
 }
 
+header nav {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Add space between logo and links */
+}
+
 header nav ul {
   list-style-type: none;
+  display: flex; /* Display links inline */
+  margin: 0;
+  padding: 0;
 }
 
 header nav ul li {
   display: inline;
   margin: 0 15px;
+  margin-right: 15px; /* Add spacing between links */
 }
 
 header nav ul li a {
@@ -41,6 +51,10 @@ header nav ul li a {
 
 header nav ul li a:hover {
   text-decoration: underline;
+}
+
+.logout-form button {
+  margin-right: 15px; /* Add spacing between the button and the last link */
 }
 
 main {
@@ -107,8 +121,15 @@ h2 {
   font-size: 1.2rem;
   font-weight: bold;
   color: #2d9cdb;
-  margin-bottom: 5px; /* Adds space between the price and the button */
-  margin-top: 80px; /* Adds space between the price and the button */
+  margin-bottom: 5px;
+  margin-top: 80px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100%; /* Full height of its parent (main) */
 }
 
 .item-card .item-info .buy-button {

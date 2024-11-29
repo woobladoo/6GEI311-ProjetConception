@@ -44,5 +44,9 @@ def accueil():
 def vente():
     return render_template("vente.html")
 
+@app.route("/vitrine")
+def vitrine():
+    return render_template("vitrine.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
