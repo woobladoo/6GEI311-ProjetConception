@@ -12,7 +12,7 @@ CREATE TABLE products (
     seller_id INTEGER NOT NULL, -- Vendeur
     title TEXT NOT NULL,
     description TEXT,
-    price REAL, -- Null si c'est une enchère
+    price INTEGER, -- Null si c'est une enchère
     is_auction BOOLEAN DEFAULT 0, -- 0: Prix fixe, 1: Enchère
     image_url TEXT,
     sold BOOLEAN DEFAULT 0, -- 0: Disponible, 1: Vendu

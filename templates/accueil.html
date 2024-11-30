@@ -26,17 +26,16 @@
           <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
           <li><a href="{{ url_for('vente') }}">Mettre en vente</a></li>
           <li><a href="{{ url_for('vitrine') }}">Ma vitrine</a></li>
-          
         </ul>
 
         <form
-            action="{{ url_for('logout') }}"
-            method="post"
-            style="display: inline"
-            class="logout-form"
-          >
-            <button type="submit" class="btn btn-danger">Se déconnecter</button>
-          </form>
+          action="{{ url_for('logout') }}"
+          method="post"
+          style="display: inline"
+          class="logout-form"
+        >
+          <button type="submit" class="btn btn-danger">Se déconnecter</button>
+        </form>
       </nav>
     </header>
 
@@ -45,102 +44,21 @@
 
       <!-- Liste des items -->
       <div class="items-container">
-        <!-- Item 1 -->
+        {% for item in items %}
         <div class="item-card">
           <img
-            src="{{ url_for('static', filename='images/divan.jpg') }}"
-            alt="Item 1"
+            src="{{ url_for('static', filename=item[6].split('/static/')[-1]) }}"
+            alt="{{ item[2] }}"
             class="item-image"
           />
           <div class="item-info">
-            <h3>Divan</h3>
-            <p class="item-description">
-              Je vends mon divan. Pas négociable. Petite tache sur un des
-              coussin. Premier arrivé premier servi.
-            </p>
-            <p class="item-price">200$</p>
+            <h3>{{ item[2] }}</h3>
+            <p class="item-description">{{ item[3] }}</p>
+            <p class="item-price">{{ item[4] }}$</p>
             <button class="buy-button">Acheter</button>
           </div>
         </div>
-
-        <!-- Item 2 -->
-        <div class="item-card">
-          <img
-            src="{{ url_for('static', filename='images/guitarehero.jpg') }}"
-            alt="Item 2"
-            class="item-image"
-          />
-          <div class="item-info">
-            <h3>Guitare pour guitar hero</h3>
-            <p class="item-description">Fonctionne très bien</p>
-            <p class="item-price">45$</p>
-            <button class="buy-button">Acheter</button>
-          </div>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="item-card">
-          <img
-            src="https://via.placeholder.com/300"
-            alt="Item 3"
-            class="item-image"
-          />
-          <div class="item-info">
-            <h3>Chaise en bois</h3>
-            <p class="item-description">
-              Chaise confortable en bois massif avec coussin.
-            </p>
-            <p class="item-price">59,99€</p>
-            <button class="buy-button">Acheter</button>
-          </div>
-        </div>
-
-        <!-- Item 4 -->
-        <div class="item-card">
-          <img
-            src="https://via.placeholder.com/300"
-            alt="Item 4"
-            class="item-image"
-          />
-          <div class="item-info">
-            <h3>Table basse</h3>
-            <p class="item-description">
-              Table basse en verre avec pieds en métal.
-            </p>
-            <p class="item-price">99,99€</p>
-            <button class="buy-button">Acheter</button>
-          </div>
-        </div>
-
-        <!-- Item 5 -->
-        <div class="item-card">
-          <img
-            src="https://via.placeholder.com/300"
-            alt="Item 5"
-            class="item-image"
-          />
-          <div class="item-info">
-            <h3>T-shirt</h3>
-            <p class="item-description">T-shirt de band.</p>
-            <p class="item-price">10$</p>
-            <button class="buy-button">Acheter</button>
-          </div>
-        </div>
-        <!-- Item 5 -->
-        <div class="item-card">
-          <img
-            src="https://via.placeholder.com/300"
-            alt="Item 5"
-            class="item-image"
-          />
-          <div class="item-info">
-            <h3>T-shirt</h3>
-            <p class="item-description">
-              T-shirt de band.
-            </p>
-            <p class="item-price">10$</p>
-            <button class="buy-button">Acheter</button>
-          </div>
+        {% endfor %}
       </div>
     </main>
 
