@@ -46,6 +46,27 @@ def load_user(user_id):
         return User(user_id=user_data[0], username=user_data[1], email=user_data[2])
     return None
 
+def get_auction(id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM auctions WHERE product_id = ?", (id,))
+    auction = cursor.fetchone()
+
+    if auction:
+        # Récupérer le nom d'utilisateur du meilleur enchérisseur
+        highest_bidder_id = auction[4]
+        cursor.execute("SELECT username FROM users WHERE user_id = ?", (highest_bidder_id,))
+        highest_bidder = cursor.fetchone()
+        
+        # Ajouter le nom d'utilisateur à l'objet auction
+        if highest_bidder:
+            auction = list(auction)  # Convertir le tuple en liste pour le modifier
+            auction.append(highest_bidder[0])  # Ajouter le nom d'utilisateur
+        else:
+            auction = list(auction)
+            auction.append(None)  # Si l'enchérisseur n'existe pas, ajouter `None`
+    conn.close()
+    return auction
 
 
 def get_user(identifier, is_username=False):
@@ -86,13 +107,13 @@ def login():
 
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT user_id, password FROM users WHERE username = ?", (username,))
+        cursor.execute("SELECT user_id, username, email, password FROM users WHERE username = ?", (username,))
         user_data = cursor.fetchone()
         conn.close()
 
-        if user_data and user_data[1] == password:  # Check password match
-            user = User(user_id=user_data[0])
-            login_user(user)  # Login the user
+        if user_data and user_data[3] == password:  # Vérifier si le mot de passe correspond
+            user = User(user_id=user_data[0], username=user_data[1], email=user_data[2])  # Créer un objet User avec tous les paramètres
+            login_user(user)  # Connecter l'utilisateur
             flash(f"Bienvenue {username}!", "success")
             return redirect(url_for("accueil"))
         else:
@@ -162,7 +183,91 @@ def submit_item():
 
 @app.route("/vitrine")
 def vitrine():
-    return render_template("vitrine.html")
+     # Connexion à la base de données pour récupérer les articles de l'utilisateur connecté
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    # Récupérer les articles de l'utilisateur connecté (current_user.get_id() donne l'ID de l'utilisateur)
+    cursor.execute("SELECT * FROM products WHERE seller_id = ?", (current_user.get_id(),))
+    items = cursor.fetchall()
+    conn.close()
+
+    # Passer les articles au modèle
+    return render_template("vitrine.html", items=items)
+
+@app.route('/add_to_cart/<int:item_id>', methods=['POST'])
+@login_required
+def add_to_cart(item_id):
+    # Vérifiez si le panier existe déjà dans la session
+    if 'cart' not in session:
+        session['cart'] = []
+
+    # Ajoutez l'ID de l'article au panier
+    session['cart'].append(item_id)
+    session.modified = True  # Indique que la session a été modifiée
+
+    flash("L'article a été ajouté au panier!", "success")
+    return redirect(url_for('accueil'))
+
+@app.route('/clear_cart', methods=['POST'])
+@login_required
+def clear_cart():
+    # Clear the cart in the session
+    if 'cart' in session:
+        session.pop('cart')  # Remove the cart key from the session
+        session.modified = True  # Mark the session as modified
+    
+    flash("Votre panier a été vidé avec succès!", "info")
+    return {"message": "Cart cleared successfully"}, 200
+
+@app.route('/remove_from_cart/<int:item_id>', methods=['POST'])
+@login_required
+def remove_from_cart(item_id):
+    if 'cart' in session:
+        session['cart'] = [item for item in session['cart'] if item != item_id]
+        session.modified = True
+        flash("L'article a été supprimé du panier.", "info")
+        return render_template("panier.html"), 200
+    return {"error": "Panier vide"}, 400
+
+
+@app.route('/panier')
+@login_required
+def panier():
+    if 'cart' not in session or not session['cart']:
+        flash("Votre panier est vide.", "info")
+        return redirect(url_for('accueil'))
+
+    # Récupérer les articles du panier depuis la base de données
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM products WHERE product_id IN ({})".format(
+        ','.join('?' * len(session['cart']))
+    ), tuple(session['cart']))
+    items = cursor.fetchall()
+    conn.close()
+
+    return render_template("panier.html", items=items)
+
+@app.route('/enchere/<int:id>')
+@login_required
+def enchere(id):
+
+     # Connexion à la base de données pour récupérer les articles de l'utilisateur connecté
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    # Récupérer les articles de l'utilisateur connecté (current_user.get_id() donne l'ID de l'utilisateur)
+    cursor.execute("SELECT * FROM products WHERE product_id = ?", (id,))
+
+    items = cursor.fetchall()
+    conn.close()
+
+    auction = get_auction(id)
+    print(items)
+
+    return render_template('enchere.html', item_id=id, items=items, auction = auction)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

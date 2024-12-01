@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marketplace - Mise en vente</title>
+    <title>Marketplace - Ma vitrine</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='vente.css') }}"
+      href="{{ url_for('static', filename='accueil.css') }}"
     />
 
     <link
@@ -26,6 +26,11 @@
           <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
           <li><a href="{{ url_for('vente') }}">Mettre en vente</a></li>
           <li><a href="{{ url_for('vitrine') }}">Ma vitrine</a></li>
+          <li>
+            <a href="{{ url_for('panier') }}" class="btn btn-primary"
+              >Mon Panier</a
+            >
+          </li>
         </ul>
         <form
           action="{{ url_for('logout') }}"
@@ -38,7 +43,32 @@
       </nav>
     </header>
 
-    <main></main>
+    <main>
+      <!-- Liste des items -->
+      <div class="items-container">
+        {% if items %} {% for item in items %}
+        <div class="item-card">
+          <img
+            src="{{ url_for('static', filename=item[6].split('/static/')[-1]) }}"
+            alt="{{ item[2] }}"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3>{{ item[2] }}</h3>
+            <p class="item-description">{{ item[3] }}</p>
+            {% if item[5] == 1 %}
+            <p class="item-price">Aux enchères</p>
+            {% else %}
+            <p class="item-price">{{ item[4] }}$</p>
+            {% endif %}
+            <button class="buy-button">Modifier</button>
+          </div>
+        </div>
+        {% endfor %} {% else %}
+        <p>Aucun article en vente pour le moment.</p>
+        {% endif %}
+      </div>
+    </main>
 
     <footer>
       <p>&copy; 2024 Mon Marketplace. Tous droits réservés.</p>

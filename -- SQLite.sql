@@ -1,2 +1,3 @@
 -- SQLite
-DELETE FROM products WHERE product_id BETWEEN 7 AND 14;
+DELETE FROM auctions
+WHERE auction_id IN (1, 2);

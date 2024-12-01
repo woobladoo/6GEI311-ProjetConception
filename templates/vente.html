@@ -26,6 +26,11 @@
           <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
           <li><a href="{{ url_for('vente') }}">Mettre en vente</a></li>
           <li><a href="{{ url_for('vitrine') }}">Ma vitrine</a></li>
+          <li>
+            <a href="{{ url_for('panier') }}" class="btn btn-primary"
+              >Mon Panier</a
+            >
+          </li>
         </ul>
         <form
           action="{{ url_for('logout') }}"

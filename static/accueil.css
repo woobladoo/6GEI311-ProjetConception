@@ -77,6 +77,13 @@ h2 {
   padding: 20px;
 }
 
+.cards-container {
+  display: flex;
+  justify-content: center; /* Space between cards */
+  gap: 1rem; /* Add space between the cards */
+  flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+}
+
 /* Carte d'article */
 .item-card {
   background-color: white;
@@ -89,6 +96,14 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.enchere-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 45%; /* Adjust this value as needed */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .item-card .item-image {
