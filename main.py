@@ -60,11 +60,11 @@ def get_auction(id):
         
         # Ajouter le nom d'utilisateur à l'objet auction
         if highest_bidder:
-            auction = list(auction)  # Convertir le tuple en liste pour le modifier
-            auction.append(highest_bidder[0])  # Ajouter le nom d'utilisateur
+            auction = list(auction)
+            auction.append(highest_bidder[0])  
         else:
             auction = list(auction)
-            auction.append(None)  # Si l'enchérisseur n'existe pas, ajouter `None`
+            auction.append(None)
     conn.close()
     return auction
 
@@ -83,12 +83,12 @@ def get_user(identifier, is_username=False):
     conn.close()
     
     if user_data:
-        # Convert the result into a dictionary
+        
         user = {
             'user_id': user_data[0],
             'username': user_data[1],
             'email': user_data[2],
-            'password': user_data[3],  # Be careful with storing passwords in plain text
+            'password': user_data[3], 
             'created_at': user_data[4]
         }
         return user
@@ -111,9 +111,9 @@ def login():
         user_data = cursor.fetchone()
         conn.close()
 
-        if user_data and user_data[3] == password:  # Vérifier si le mot de passe correspond
-            user = User(user_id=user_data[0], username=user_data[1], email=user_data[2])  # Créer un objet User avec tous les paramètres
-            login_user(user)  # Connecter l'utilisateur
+        if user_data and user_data[3] == password:  
+            user = User(user_id=user_data[0], username=user_data[1], email=user_data[2]) 
+            login_user(user)  
             flash(f"Bienvenue {username}!", "success")
             return redirect(url_for("accueil"))
         else:
@@ -160,10 +160,10 @@ def submit_item():
     title = request.form['itemName']
     price = request.form['itemPrice']
     description = request.form['itemDescription']
-    is_auction = bool(request.form.get('auction'))  # Convertit la case à cocher en booléen
+    is_auction = bool(request.form.get('auction')) 
     image_file = request.files['itemImage']
 
-    # Enregistrez l'image dans le dossier statique
+    # Enregistre l'image dans le dossier statique
     image_path = None
     if image_file:
         image_path = f'images/{image_file.filename}'
@@ -183,11 +183,11 @@ def submit_item():
 
 @app.route("/vitrine")
 def vitrine():
-     # Connexion à la base de données pour récupérer les articles de l'utilisateur connecté
+   
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    # Récupérer les articles de l'utilisateur connecté (current_user.get_id() donne l'ID de l'utilisateur)
+    # Récupérer les articles de l'utilisateur connecté
     cursor.execute("SELECT * FROM products WHERE seller_id = ?", (current_user.get_id(),))
     items = cursor.fetchall()
     conn.close()
@@ -212,10 +212,10 @@ def add_to_cart(item_id):
 @app.route('/clear_cart', methods=['POST'])
 @login_required
 def clear_cart():
-    # Clear the cart in the session
+    
     if 'cart' in session:
-        session.pop('cart')  # Remove the cart key from the session
-        session.modified = True  # Mark the session as modified
+        session.pop('cart')  
+        session.modified = True  
     
     flash("Votre panier a été vidé avec succès!", "info")
     return {"message": "Cart cleared successfully"}, 200
@@ -253,7 +253,6 @@ def panier():
 @login_required
 def enchere(id):
 
-     # Connexion à la base de données pour récupérer les articles de l'utilisateur connecté
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
